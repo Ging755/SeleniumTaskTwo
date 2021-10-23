@@ -24,6 +24,9 @@ namespace SeleniumTaskTwo
             loginPage.Login(_repository.GetCorrectUserName(), _repository.GetCorrectPassword());
         }
 
+        /// <summary>
+        /// Tests if products are being displayed
+        /// </summary>
         [Test]
         public void ProductsDisplayed()
         {
@@ -31,6 +34,9 @@ namespace SeleniumTaskTwo
             Assert.IsTrue(productsPage.AnyProductItemsDisplayed());
         }
 
+        /// <summary>
+        /// Tests add to cart funtion
+        /// </summary>
         [Test]
         public void AddToCart()
         {
@@ -38,6 +44,10 @@ namespace SeleniumTaskTwo
             Assert.IsTrue(productsPage.AddToCart());
         }
 
+
+        /// <summary>
+        /// Tests remove from cart function
+        /// </summary>
         [Test]
         public void RemoveFromCart()
         {
@@ -46,6 +56,9 @@ namespace SeleniumTaskTwo
             Assert.IsTrue(productsPage.RemoveFromCart());
         }
 
+        /// <summary>
+        /// Tests filtering highest to lowest price funtion
+        /// </summary>
         [Test]
         public void FilterPriceHighToLow()
         {
@@ -53,6 +66,10 @@ namespace SeleniumTaskTwo
             Assert.IsTrue(productsPage.SelectFilterOption("hilo").Text.Equals(_repository.GetHighestProductPrice()));
         }
 
+
+        /// <summary>
+        /// Test filtering lowest to highest price funtion
+        /// </summary>
         [Test]
         public void FilterPriceLowToHigh()
         {

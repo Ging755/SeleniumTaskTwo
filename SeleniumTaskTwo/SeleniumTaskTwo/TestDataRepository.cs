@@ -14,6 +14,10 @@ namespace SeleniumTaskTwo
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         }
 
+        /// <summary>
+        /// Gets correct UserName for login action
+        /// </summary>
+        /// <returns></returns>
         public string GetCorrectUserName()
         {
             
@@ -24,6 +28,11 @@ namespace SeleniumTaskTwo
             }
         }
 
+
+        /// <summary>
+        /// Gets correct Password for login action
+        /// </summary>
+        /// <returns></returns>
         public string GetCorrectPassword()
         {
             using (var package = new ExcelPackage(new FileInfo(_filePath)))
@@ -33,6 +42,11 @@ namespace SeleniumTaskTwo
             }
         }
 
+
+        /// <summary>
+        /// Gets incorrect username for login action testing
+        /// </summary>
+        /// <returns></returns>
         public string GetIncorrectUserName()
         {
             using (var package = new ExcelPackage(new FileInfo(_filePath)))
@@ -42,6 +56,10 @@ namespace SeleniumTaskTwo
             }
         }
 
+        /// <summary>
+        /// Gets incorrect Password for login action testing
+        /// </summary>
+        /// <returns></returns>
         public string GetIncorrectPassword()
         {
             using (var package = new ExcelPackage(new FileInfo(_filePath)))
@@ -51,6 +69,10 @@ namespace SeleniumTaskTwo
             }
         }
 
+        /// <summary>
+        /// Gets highest price from products
+        /// </summary>
+        /// <returns></returns>
         public string GetHighestProductPrice()
         {
             using (var package = new ExcelPackage(new FileInfo(_filePath)))
@@ -60,6 +82,11 @@ namespace SeleniumTaskTwo
             }
         }
 
+
+        /// <summary>
+        /// Gets lowest price from products
+        /// </summary>
+        /// <returns></returns>
         public string GetLowestProductPrice()
         {
             using (var package = new ExcelPackage(new FileInfo(_filePath)))
