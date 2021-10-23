@@ -9,16 +9,19 @@ namespace SeleniumTaskTwo
 {
     class ProductsPageTests
     {
+        private TestDataRepository _repository;
+
         [SetUp]
         public void Initilize()
         {
             MainWebDriver.Driver = new ChromeDriver();
+            _repository = new TestDataRepository();
 
             //Navigate to login Page
             MainWebDriver.Driver.Navigate().GoToUrl("https://www.saucedemo.com/");
             //Complete login to reach products page
             LoginPage loginPage = new LoginPage();
-            loginPage.Login("standard_user", "secret_sauce");
+            loginPage.Login(_repository.GetCorrectUserName(), _repository.GetCorrectPassword());
         }
 
         [Test]
@@ -47,14 +50,14 @@ namespace SeleniumTaskTwo
         public void FilterPriceHighToLow()
         {
             ProductsPage productsPage = new ProductsPage();
-            Assert.IsTrue(productsPage.SelectFilterOption("hilo").Text.Equals("$49.99"));
+            Assert.IsTrue(productsPage.SelectFilterOption("hilo").Text.Equals(_repository.GetHighestProductPrice()));
         }
 
         [Test]
         public void FilterPriceLowToHigh()
         {
             ProductsPage productsPage = new ProductsPage();
-            Assert.IsTrue(productsPage.SelectFilterOption("lohi").Text.Equals("$7.99"));
+            Assert.IsTrue(productsPage.SelectFilterOption("lohi").Text.Equals(_repository.GetLowestProductPrice()));
         }
 
         [TearDown]

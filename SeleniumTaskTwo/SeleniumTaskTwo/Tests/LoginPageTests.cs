@@ -7,10 +7,13 @@ namespace SeleniumTaskTwo
 {
     class LoginPageTests
     {
+        private TestDataRepository _repository;
+
         [SetUp]
         public void Initilize()
         {
             MainWebDriver.Driver = new ChromeDriver();
+            _repository = new TestDataRepository();
 
             //Navigate to login Page
             MainWebDriver.Driver.Navigate().GoToUrl("https://www.saucedemo.com/");
@@ -29,7 +32,7 @@ namespace SeleniumTaskTwo
         {
             LoginPage loginPage = new LoginPage();
             //Checking if corret error message is displayed when username or password are incorrect
-            Assert.IsTrue(loginPage.Login("WrongUserName", "WrongPassword").Text.Equals("Epic sadface: Username and password do not match any user in this service"));
+            Assert.IsTrue(loginPage.Login(_repository.GetIncorrectUserName(), _repository.GetIncorrectPassword()).Text.Equals("Epic sadface: Username and password do not match any user in this service"));
         }
 
         [Test]
@@ -37,7 +40,7 @@ namespace SeleniumTaskTwo
         {
             LoginPage loginPage = new LoginPage();
             //Checking if corret error message is displayed when username is empty
-            Assert.IsTrue(loginPage.Login("", "WrongPassword").Text.Equals("Epic sadface: Username is required"));
+            Assert.IsTrue(loginPage.Login("", _repository.GetIncorrectPassword()).Text.Equals("Epic sadface: Username is required"));
         }
 
         [Test]
@@ -45,7 +48,7 @@ namespace SeleniumTaskTwo
         {
             LoginPage loginPage = new LoginPage();
             //Checking if corret error message is displayed when password is empty
-            Assert.IsTrue(loginPage.Login("Username", "").Text.Equals("Epic sadface: Password is required"));
+            Assert.IsTrue(loginPage.Login(_repository.GetIncorrectUserName(), "").Text.Equals("Epic sadface: Password is required"));
         }
 
         [Test]
@@ -53,7 +56,7 @@ namespace SeleniumTaskTwo
         {
             LoginPage loginPage = new LoginPage();
             //After successfull login, products page should be displayed
-            Assert.IsTrue(loginPage.Login("standard_user", "secret_sauce").Displayed);
+            Assert.IsTrue(loginPage.Login(_repository.GetCorrectUserName(), _repository.GetCorrectPassword()).Displayed);
         }
 
         [TearDown]
