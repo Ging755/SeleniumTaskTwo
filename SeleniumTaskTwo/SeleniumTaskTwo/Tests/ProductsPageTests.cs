@@ -2,7 +2,6 @@
 using OpenQA.Selenium.Chrome;
 using SeleniumTaskTwo.PageObjects;
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace SeleniumTaskTwo
@@ -63,7 +62,8 @@ namespace SeleniumTaskTwo
         public void FilterPriceHighToLow()
         {
             ProductsPage productsPage = new ProductsPage();
-            Assert.IsTrue(productsPage.SelectFilterOption("hilo").Text.Equals(_repository.GetHighestProductPrice()));
+            productsPage.SelectFilterOption("hilo");
+            Assert.IsTrue(productsPage.GetFirstProductPrice().Text.Equals(_repository.GetHighestProductPrice()));
         }
 
 
@@ -74,7 +74,8 @@ namespace SeleniumTaskTwo
         public void FilterPriceLowToHigh()
         {
             ProductsPage productsPage = new ProductsPage();
-            Assert.IsTrue(productsPage.SelectFilterOption("lohi").Text.Equals(_repository.GetLowestProductPrice()));
+            productsPage.SelectFilterOption("lohi");
+            Assert.IsTrue(productsPage.GetFirstProductPrice().Text.Equals(_repository.GetLowestProductPrice()));
         }
 
         [TearDown]

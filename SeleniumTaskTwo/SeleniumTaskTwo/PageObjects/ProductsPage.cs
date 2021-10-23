@@ -37,9 +37,13 @@ namespace SeleniumTaskTwo.PageObjects
             return AddToCartButton.Text.Equals("ADD TO CART");
         }
     
-        public IWebElement SelectFilterOption(string filterOption)
+        public void SelectFilterOption(string filterOption)
         {
             FillterDropDown.SelectByValue(filterOption);
+        }
+    
+        public IWebElement GetFirstProductPrice()
+        {
             return ProductItems.FirstOrDefault().FindElement(By.XPath(".//div[@class='inventory_item_price']"));
         }
     }
