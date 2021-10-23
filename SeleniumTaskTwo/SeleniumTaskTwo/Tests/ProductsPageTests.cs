@@ -43,6 +43,20 @@ namespace SeleniumTaskTwo
             Assert.IsTrue(productsPage.RemoveFromCart());
         }
 
+        [Test]
+        public void FilterPriceHighToLow()
+        {
+            ProductsPage productsPage = new ProductsPage();
+            Assert.IsTrue(productsPage.SelectFilterOption("hilo").Text.Equals("$49.99"));
+        }
+
+        [Test]
+        public void FilterPriceLowToHigh()
+        {
+            ProductsPage productsPage = new ProductsPage();
+            Assert.IsTrue(productsPage.SelectFilterOption("lohi").Text.Equals("$7.99"));
+        }
+
         [TearDown]
         public void CleanUp()
         {

@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,9 @@ namespace SeleniumTaskTwo.PageObjects
         }
 
         public IEnumerable<IWebElement> ProductItems => _driver.FindElements(By.ClassName("inventory_item"));
-        public IWebElement AddToCartButton => _driver.FindElement(By.XPath("//div[@class='inventory_item']//button"));
+        public IWebElement AddToCartButton => ProductItems.FirstOrDefault().FindElement(By.XPath(".//button"));
+        public SelectElement FillterDropDown => new SelectElement(_driver.FindElement(By.ClassName("product_sort_container")));
+
         public bool AnyProductItemsDisplayed()
         {
             return ProductItems.Count() > 0;
@@ -32,6 +35,12 @@ namespace SeleniumTaskTwo.PageObjects
         {
             AddToCartButton.Click();
             return AddToCartButton.Text.Equals("ADD TO CART");
+        }
+    
+        public IWebElement SelectFilterOption(string filterOption)
+        {
+            FillterDropDown.SelectByValue(filterOption);
+            return ProductItems.FirstOrDefault().FindElement(By.XPath(".//div[@class='inventory_item_price']"));
         }
     }
 }
