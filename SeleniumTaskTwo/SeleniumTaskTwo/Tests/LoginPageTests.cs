@@ -5,7 +5,7 @@ using System;
 
 namespace SeleniumTaskTwo
 {
-    class Program
+    class LoginPageTests
     {
         [SetUp]
         public void Initilize()
